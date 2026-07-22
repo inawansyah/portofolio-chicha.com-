@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicha Amalia Putri - Data Analyst & Supply Chain Specialist</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. VARIABLES & BASE STYLES
+           ========================================================================== */
+        :root {
+            /* Palette: Desert Sands */
+            --bg-main: #FEF9EF;
+            --bg-card: #FFFFFF;
+            --bg-soft: #FDE9D0;
+            --accent-light: #E6A871;
+            --accent-primary: #C26D3C;
+            --text-dark: #5C2E14;
+            --text-muted: #8C5338;
+            --border-color: rgba(194, 109, 60, 0.18);
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(254, 249, 239, 0.85);
+            --glass-border: rgba(194, 109, 60, 0.15);
+            --shadow-soft: 0 10px 30px -10px rgba(92, 46, 20, 0.08);
+            --shadow-hover: 0 20px 40px -15px rgba(194, 109, 60, 0.2);
+
+            /* Typography */
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-light);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: var(--accent-primary);
+            color: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Gradient Mesh Background Effect */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(253, 233, 208, 0.7) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(230, 168, 113, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(254, 249, 239, 1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Typography Helper Classes */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-primary);
+            background-color: var(--bg-soft);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.8rem;
+            font-weight: 600;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(194, 109, 60, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--text-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(92, 46, 20, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background-color: rgba(194, 109, 60, 0.05);
+            transform: translateY(-3px);
+        }
+
+        /* Animations Framework */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           2. NAVBAR
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            padding: 1.25rem 0;
+        }
+
+        .navbar.scrolled {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0.85rem 0;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            position: relative;
+            padding: 0.2rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-primary);
+            transition: var(--transition-fast);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        /* Mobile Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-dark);
+            border-radius: 2px;
+            transition: var(--transition-smooth);
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 7rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--bg-soft);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            letter-spacing: -1px;
+        }
+
+        .hero-title span {
+            color: var(--accent-primary);
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 580px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition-smooth);
+        }
+
+        .hero-image-wrapper:hover .hero-image {
+            transform: scale(1.03);
+        }
+
+        /* Floating Data Badge on Hero Image */
+        .floating-data-card {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 1.25rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .floating-icon {
+            width: 42px;
+            height: 42px;
+            background-color: var(--accent-primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .floating-text h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .floating-text p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           4. TENTANG SAYA
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+
+        .profile-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 100px;
+        }
+
+        .profile-img-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.25rem auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--bg-soft);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-role {
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .profile-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .about-bio {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2.5rem;
+        }
+
+        .about-bio p {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .about-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Skills Cards Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-primary);
+        }
+
+        .skill-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-icon {
+            width: 36px;
+            height: 36px;
+            background-color: var(--bg-soft);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .skill-title {
+            font-size: 1.1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-main);
+            border: 1px solid rgba(194, 109, 60, 0.12);
+            color: var(--text-dark);
+            font-size: 0.82rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           5. PENGALAMAN KERJA & MAGANG
+           ========================================================================== */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .experience-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-primary);
+        }
+
+        .exp-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .exp-company {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-role {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: inline-block;
+            background-color: var(--bg-soft);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+        }
+
+        .exp-body p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ==========================================================================
+           6. PROYEK / PORTFOLIO
+           ========================================================================== */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--accent-primary);
+            color: #FFFFFF;
+            border-color: var(--accent-primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+        }
+
+        .portfolio-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-card.hide {
+            display: none;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-primary);
+        }
+
+        .portfolio-img-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .portfolio-card:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            border: 1px solid var(--glass-border);
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .portfolio-title {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .portfolio-link {
+            text-decoration: none;
+            color: var(--accent-primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition-fast);
+        }
+
+        .portfolio-link:hover {
+            color: var(--text-dark);
+            gap: 0.7rem;
+        }
+
+        /* Modal Detail Portfolio */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(92, 46, 20, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-content {
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-hover);
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           7. KONTAK
+           ========================================================================== */
+        .contact-card-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
+            box-shadow: var(--shadow-soft);
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.75rem;
+            margin: 2.5rem 0;
+            text-align: left;
+        }
+
+        .contact-item {
+            background-color: var(--bg-main);
+            padding: 1.25rem;
+            border-radius: 16px;
+            border: 1px solid rgba(194, 109, 60, 0.12);
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .contact-value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            word-break: break-word;
+        }
+
+        /* ==========================================================================
+           8. FOOTER
+           ========================================================================== */
+        .footer {
+            background-color: var(--text-dark);
+            color: #FEF9EF;
+            padding: 4rem 0 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(254, 249, 239, 0.1);
+        }
+
+        .footer-brand h3 {
+            color: #FEF9EF;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: rgba(254, 249, 239, 0.7);
+            font-size: 0.95rem;
+            max-width: 400px;
+        }
+
+        .footer-links-title {
+            color: var(--accent-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-nav a {
+            color: rgba(254, 249, 239, 0.8);
+            text-decoration: none;
+            transition: var(--transition-fast);
+            font-size: 0.9rem;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(254, 249, 239, 0.5);
+        }
+
+        /* ==========================================================================
+           9. RESPONSIVE DESIGN (MEDIA QUERIES)
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background-color: var(--bg-main);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: var(--transition-smooth);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero-image-wrapper {
+                order: -1;
+            }
+
+            .hero-image {
+                height: 350px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                position: static;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Gradient Mesh -->
+    <div class="bg-mesh"></div>
+
+    <!-- ===1. NAVBAR=== -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">
+                Chicha A. Putri <span class="logo-dot"></span>
+            </a>
+            
+            <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-link">Tentang</a></li>
+                <li><a href="#experience" class="nav-link">Pengalaman Kerja</a></li>
+                <li><a href="#internship" class="nav-link">Pengalaman Magang</a></li>
+                <li><a href="#portfolio" class="nav-link">Proyek</a></li>
+                <li><a href="#contact" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===2. HERO=== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content reveal">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span> Terbuka untuk Peluang Kerja
+                    </div>
+                    <h1 class="hero-title">
+                        Menghubungkan Presisi Matematika dengan <span>Kecepatan Supply Chain</span>
+                    </h1>
+                    <p class="hero-description">
+                        Mengubah data operasional menjadi efisiensi produksi nyata. Spesialis dalam perencanaan persediaan, demand forecasting, dan optimasi operasional berbasis data.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#portfolio" class="btn btn-primary">Lihat Proyek</a>
+                        <a href="#contact" class="btn btn-secondary">Hubungi Saya</a>
+                    </div>
+                </div>
+                
+                <div class="hero-image-wrapper reveal">
+                    <!-- High quality Unsplash Image representing Data Analysis & Supply Chain Analytics -->
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Data Analytics & Supply Chain Visual" class="hero-image" loading="lazy">
+                    
+                    <div class="floating-data-card">
+                        <div class="floating-icon">📊</div>
+                        <div class="floating-text">
+                            <h4>3.500+ Pcs / Hari</h4>
+                            <p>Kapasitas Produksi Dikelola & Dioptimalkan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===3. TENTANG SAYA=== -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Profil & Keahlian</span>
+                <h2 class="section-title">Mengenal Lebih Dekat</h2>
+            </div>
+
+            <div class="about-grid">
+                <!-- Left: Profile Card -->
+                <div class="profile-card reveal">
+                    <div class="profile-img-container">
+                        <img src="https://placehold.co/400x400/FDE9D0/5C2E14?text=Chicha+Amalia" alt="Chicha Amalia Putri" class="profile-img" loading="lazy">
+                    </div>
+                    <h3 class="profile-name">Chicha Amalia Putri</h3>
+                    <p class="profile-role">Data Analyst / Supply Chain</p>
+                    <p class="profile-location">📍 DKI Jakarta, WIB</p>
+                </div>
+
+                <!-- Right: Bio & Skills -->
+                <div class="about-right">
+                    <div class="about-bio reveal">
+                        <p>
+                            Saya merupakan lulusan S1 Matematika dari Universitas Islam Negeri Walisongo dengan pengalaman lebih dari 1 tahun di bidang merchandising produksi garment. Berawal dari kecintaan terhadap angka dan pola, saya memadukan kemampuan analitis sistematis untuk menyelesaikan kendala nyata di lapangan.
+                        </p>
+                        <p>
+                            Fokus utama saya terletak pada <strong>Supply Chain Management, PPIC, Data Analytics, dan Operational Planning</strong>. Berpengalaman dalam meramal kebutuhan produksi (forecasting), verifikasi vendor, hingga pemantauan persediaan agar proses operasional berjalan efisien tanpa kehabisan stok maupun pemborosan material.
+                        </p>
+                    </div>
+
+                    <!-- 4 Skills Cards Grid -->
+                    <div class="skills-grid">
+                        <!-- Card 1: Technical Skills -->
+                        <div class="skill-card reveal">
+                            <div class="skill-card-header">
+                                <div class="skill-icon">⚙️</div>
+                                <h3 class="skill-title">Technical Skills</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">MS Excel (Advanced)</span>
+                                <span class="skill-tag">Pivot & XLOOKUP</span>
+                                <span class="skill-tag">Demand Forecasting</span>
+                                <span class="skill-tag">Looker Studio</span>
+                                <span class="skill-tag">Data Cleaning</span>
+                                <span class="skill-tag">MRP System</span>
+                                <span class="skill-tag">Inventory Analysis</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Soft Skills -->
+                        <div class="skill-card reveal">
+                            <div class="skill-card-header">
+                                <div class="skill-icon">🧠</div>
+                                <h3 class="skill-title">Soft Skills</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Analytical Thinking</span>
+                                <span class="skill-tag">Problem Solving</span>
+                                <span class="skill-tag">Communication</span>
+                                <span class="skill-tag">Negotiation</span>
+                                <span class="skill-tag">Leadership</span>
+                                <span class="skill-tag">Time Management</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Bahasa -->
+                        <div class="skill-card reveal">
+                            <div class="skill-card-header">
+                                <div class="skill-icon">🌐</div>
+                                <h3 class="skill-title">Bahasa</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Bahasa Indonesia (Native)</span>
+                                <span class="skill-tag">Bahasa Inggris (TOEFL 483)</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Pelatihan -->
+                        <div class="skill-card reveal">
+                            <div class="skill-card-header">
+                                <div class="skill-icon">🎓</div>
+                                <h3 class="skill-title">Pelatihan & Sertifikasi</h3>
+                            </div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Data Analyst - Karinnex (Batch 5)</span>
+                                <span class="skill-tag">Data Science - KT&G SangSang Univ (Batch 10)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===4. PENGALAMAN KERJA=== -->
+    <section id="experience" style="background-color: rgba(253, 233, 208, 0.3);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Karier Profesional</span>
+                <h2 class="section-title">Pengalaman Kerja</h2>
+            </div>
+
+            <div class="experience-grid">
+                <div class="experience-card reveal">
+                    <div class="exp-header">
+                        <div class="exp-company">PT HANA FASHION</div>
+                        <h3 class="exp-role">Staff Merchandiser Produksi</h3>
+                        <span class="exp-date">Juli 2025 – Juni 2026</span>
+                    </div>
+                    <div class="exp-body">
+                        <p>
+                            Mengelola alokasi dan alur produksi end-to-end untuk 15+ SKU/Style dengan volume mencapai 3.500+ pcs per hari di 19 vendor produksi (CMT). Bertanggung jawab memastikan kapasitas produksi vendor selaras dengan target completion dan jadwal pengiriman melalui order sheet dan perencanaan material. Berhasil mengendalikan lead time serta rutin menganalisis data penjualan untuk rekomendasi replenishment produk baru.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===5. PENGALAMAN MAGANG=== -->
+    <section id="internship">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Pengalaman Pembelajaran</span>
+                <h2 class="section-title">Pengalaman Magang</h2>
+            </div>
+
+            <div class="experience-grid">
+                <!-- Magang 1 -->
+                <div class="experience-card reveal">
+                    <div class="exp-header">
+                        <div class="exp-company">PT HANA FASHION</div>
+                        <h3 class="exp-role">Magang Divisi Merchandiser Produksi</h3>
+                        <span class="exp-date">Februari – Juli 2025</span>
+                    </div>
+                    <div class="exp-body">
+                        <p>
+                            Mendukung pengendalian operasional produksi melalui pemantauan harian terhadap progres di vendor (CMT), jadwal delivery, serta pembaruan status pesanan. Berpartisipasi dalam analisis kebutuhan material, koordinasi administrasi purchasing, serta pengolahan data penjualan untuk laporan evaluasi operasional.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Magang 2 -->
+                <div class="experience-card reveal">
+                    <div class="exp-header">
+                        <div class="exp-company">BAPPEDA KOTA SEMARANG</div>
+                        <h3 class="exp-role">Staf Magang Perencanaan Pengendalian & Evaluasi</h3>
+                        <span class="exp-date">Januari – Maret 2023</span>
+                    </div>
+                    <div class="exp-body">
+                        <p>
+                            Berkontribusi dalam penyusunan dokumen perencanaan daerah (RPJMD/RKPD) dan mengolah data kuantitatif evaluasi program pemerintah. <strong>Menginisiasi sistem pengelolaan data berbasis MS Excel yang berhasil meningkatkan efisiensi proses penginputan serta mengurangi waktu pengolahan data hingga 20%.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===6. PROYEK / PORTFOLIO=== -->
+    <section id="portfolio" style="background-color: rgba(253, 233, 208, 0.3);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">Karya & Studi Kasus</span>
+                <h2 class="section-title">Proyek Pilihan</h2>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="portfolio-filters reveal">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="ui-ux">UI/UX Design</button>
+                <button class="filter-btn" data-filter="ux-research">UX Research</button>
+                <button class="filter-btn" data-filter="ui-design">UI Design</button>
+            </div>
+
+            <!-- Grid Proyek -->
+            <div class="portfolio-grid">
+                <!-- Proyek 1 -->
+                <div class="portfolio-card reveal" data-category="ui-ux">
+                    <div class="portfolio-img-wrapper">
+                        <img src="https://placehold.co/600x400/FDE9D0/5C2E14?text=Aplikasi+Finansial" alt="Aplikasi Finansial" class="portfolio-img" loading="lazy">
+                        <span class="portfolio-category">UI/UX Design</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Aplikasi Finansial</h3>
+                        <p class="portfolio-desc">Merancang ulang aplikasi fintech yang meningkatkan konversi pengguna hingga 40% melalui kemudahan alur transaksi.</p>
+                        <a href="#" class="portfolio-link" onclick="openModal('Aplikasi Finansial', 'Merancang ulang aplikasi fintech yang berfokus pada kemudahan navigasi dan peningkatan konversi pengguna sebesar 40%. Proyek ini mengoptimalkan alur checkout dan visualisasi riwayat transaksi.'); return false;">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Proyek 2 -->
+                <div class="portfolio-card reveal" data-category="ux-research">
+                    <div class="portfolio-img-wrapper">
+                        <img src="https://placehold.co/600x400/FDE9D0/5C2E14?text=E-Commerce+Platform" alt="E-Commerce Platform" class="portfolio-img" loading="lazy">
+                        <span class="portfolio-category">UX Research</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">E-Commerce Platform</h3>
+                        <p class="portfolio-desc">Riset mendalam terhadap perilaku pengguna platform belanja online yang melibatkan lebih dari 200 responden.</p>
+                        <a href="#" class="portfolio-link" onclick="openModal('E-Commerce Platform', 'Melakukan riset kuantitatif dan kualitatif kepada 200+ responden untuk memetakan pain points pengguna saat berbelanja online, menghasilkan rekomendasi fitur baru.'); return false;">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Proyek 3 -->
+                <div class="portfolio-card reveal" data-category="ui-design">
+                    <div class="portfolio-img-wrapper">
+                        <img src="https://placehold.co/600x400/FDE9D0/5C2E14?text=Dashboard+Analytics" alt="Dashboard Analytics" class="portfolio-img" loading="lazy">
+                        <span class="portfolio-category">UI Design</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Dashboard Analytics</h3>
+                        <p class="portfolio-desc">Mendesain dashboard data kompleks menjadi antarmuka visual yang sangat intuitif dan mudah dipahami.</p>
+                        <a href="#" class="portfolio-link" onclick="openModal('Dashboard Analytics', 'Perancangan visualisasi data kompleks menjadi komponen dashboard terstruktur, membantu manajemen dalam pengambilan keputusan operasional secara cepat.'); return false;">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Proyek 4 -->
+                <div class="portfolio-card reveal" data-category="ui-ux">
+                    <div class="portfolio-img-wrapper">
+                        <img src="https://placehold.co/600x400/FDE9D0/5C2E14?text=Aplikasi+Kesehatan" alt="Aplikasi Kesehatan" class="portfolio-img" loading="lazy">
+                        <span class="portfolio-category">UI/UX Design</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">Aplikasi Kesehatan</h3>
+                        <p class="portfolio-desc">Aplikasi telemedicine modern dengan fokus utama pada aksesibilitas dan kemudahan penggunaan bagi lansia.</p>
+                        <a href="#" class="portfolio-link" onclick="openModal('Aplikasi Kesehatan', 'Aplikasi layanan kesehatan jarak jauh (telemedicine) dengan penyesuaian kontras warna dan ukuran elemen khusus untuk memudahkan kelompok pengguna lansia.'); return false;">Lihat Detail →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Detail Proyek -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 id="modalTitle" style="margin-bottom: 1rem;">Judul Proyek</h3>
+            <p id="modalDescription" style="color: var(--text-muted); line-height: 1.7;">Deskripsi proyek...</p>
+        </div>
+    </div>
+
+    <!-- ===7. KONTAK=== -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-card-wrapper reveal">
+                <span class="section-tag">Mari Berdiskusi</span>
+                <h2 class="section-title">Tertarik Berkolaborasi?</h2>
+                <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
+                    Saya selalu terbuka untuk diskusi seputar efisiensi operasional, analisis data, maupun peluang karier baru.
+                </p>
+
+                <div class="contact-info-grid">
+                    <div class="contact-item">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">chichaamaliaptr@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">WhatsApp</div>
+                        <div class="contact-value">+62 857-7358-4629</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Lokasi & Zona Waktu</div>
+                        <div class="contact-value">DKI Jakarta, WIB</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Jam Kerja / Respon</div>
+                        <div class="contact-value">Senin–Jumat, 09.00–18.00</div>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/6285773584629" target="_blank" class="btn btn-primary" style="font-size: 1.05rem; padding: 1rem 2.2rem;">
+                    💬 Chat via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===FOOTER=== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Chicha Amalia Putri</h3>
+                    <p>Menghubungkan Presisi Matematika dengan Kecepatan Supply Chain: Mengubah Data Menjadi Efisiensi Produksi.</p>
+                </div>
+                <div>
+                    <div class="footer-links-title">Navigasi Cepat</div>
+                    <div class="footer-nav">
+                        <a href="#about">Tentang Saya</a>
+                        <a href="#experience">Pengalaman Kerja</a>
+                        <a href="#internship">Pengalaman Magang</a>
+                        <a href="#portfolio">Proyek</a>
+                        <a href="#contact">Kontak</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Chicha Amalia Putri. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===JAVASCRIPT LOGIC=== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* 1. Navbar Scroll Effect & Active Link Highlight */
+            const navbar = document.getElementById('navbar');
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+
+                // IntersectionObserver Logic fallback/manual trigger for navbar active link
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            /* 2. Mobile Menu Hamburger Toggle */
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                navMenu.classList.toggle('open');
+            });
+
+            // Close mobile nav when clicking a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    navMenu.classList.remove('open');
+                });
+            });
+
+            /* 3. IntersectionObserver for Reveal Animations on Scroll */
+            const observerOptions = {
+                root: null,
+                threshold: 0.15
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Trigger only once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            /* 4. Portfolio Category Filtering */
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Reset active class
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    portfolioCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.classList.remove('hide');
+                        } else {
+                            card.classList.add('hide');
+                        }
+                    });
+                });
+            });
+        });
+
+        /* 5. Modal Functionality for Portfolio Cards */
+        function openModal(title, description) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDescription').innerText = description;
+            document.getElementById('projectModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of modal content
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('projectModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
